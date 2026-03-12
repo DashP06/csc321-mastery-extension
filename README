@@ -1,0 +1,6 @@
+Framework
+Frontend: Angular
+Backend: Node + Express
+Database: PostgreSQL
+ORM: Prima
+Auth: manual JWT (for the sake of demo)
