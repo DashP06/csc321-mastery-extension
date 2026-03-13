@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const prisma = require('./db');
 
 const router = express.Router();
-const JWT_SECRET = process.env.JWT_SECRET || 'dev-secret';
+const JWT_SECRET = process.env.JWT_SECRET;
 
 function requireAdmin(req, res, next) {
   const auth = req.headers.authorization;
