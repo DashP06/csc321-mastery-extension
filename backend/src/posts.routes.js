@@ -34,6 +34,9 @@ router.get('/:id', async (req, res) => {
 
 // POST /posts
 router.post('/', requireAuth, async (req, res) => {
+  if (req.user.role === 'VIEWER') {
+    return res.status(403).json({ error: 'Viewers cannot create posts' });
+  }
   const { title, content } = req.body;
   const post = await prisma.post.create({
     data: { title, content, authorId: req.user.id },
@@ -43,17 +46,27 @@ router.post('/', requireAuth, async (req, res) => {
 
 // PUT /posts/:id
 router.put('/:id', requireAuth, async (req, res) => {
+  const post = await prisma.post.findUnique({ where: { id: Number(req.params.id) } });
+  if (!post) return res.status(404).json({ error: 'Not found' });
+  if (req.user.role !== 'ADMIN' && post.authorId !== req.user.id) {
+    return res.status(403).json({ error: 'You can only edit your own posts' });
+  }
   const { title, content } = req.body;
-  const post = await prisma.post.update({
-    where: { id: Number(req.params.id) },
+  const updated = await prisma.post.update({
+    where: { id: post.id },
     data: { title, content },
   });
-  res.json(post);
+  res.json(updated);
 });
 
 // DELETE /posts/:id
 router.delete('/:id', requireAuth, async (req, res) => {
-  await prisma.post.delete({ where: { id: Number(req.params.id) } });
+  const post = await prisma.post.findUnique({ where: { id: Number(req.params.id) } });
+  if (!post) return res.status(404).json({ error: 'Not found' });
+  if (req.user.role !== 'ADMIN' && post.authorId !== req.user.id) {
+    return res.status(403).json({ error: 'You can only delete your own posts' });
+  }
+  await prisma.post.delete({ where: { id: post.id } });
   res.status(204).send();
 });
 
