@@ -1,10 +1,15 @@
 <app-navbar/>
 
+<div class="header">
+  <h1>Cal Poly Blog</h1>
+  <p>Welcome to the Cal Poly blog. Viewers can see all posts. Editors can create posts, as well as edit and delete their own posts. Admins can additionally edit or delete any post, as well as mange the roles of other users.</p>
+</div>
+
 @if (name === "") {
-    <p>You must be loggen in to visit the Cal Poly blog.</p>
+    <h2>Please log in or register to view the Cal Poly blog.</h2>
 } @else {
 @for (post of posts; track post.id) {
-  <div>
+  <div class="post">
     <h2>{{ post.title }}</h2>
     <p>{{ post.content }}</p>
     <p>by {{ post.author?.name }}</p>

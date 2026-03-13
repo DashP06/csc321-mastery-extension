@@ -1,0 +1,10 @@
+.header {
+  text-align: center;
+}
+
+.post {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 12px 0;
+}
