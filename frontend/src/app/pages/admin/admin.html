@@ -1,5 +1,8 @@
 <app-navbar/>
 
+@if (role !== 'ADMIN') {
+  <h2>Access Denied</h2>
+} @else {
 <h2>Manage Users</h2>
 
 <table>
@@ -26,3 +29,4 @@
     }
   </tbody>
 </table>
+}

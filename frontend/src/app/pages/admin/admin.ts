@@ -10,14 +10,18 @@ import { Admin as AdminService, User } from '../../services/admin';
 })
 export class Admin implements OnInit {
   users: User[] = [];
+  role = '';
 
   constructor(private adminService: AdminService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
-    this.adminService.getUsers().subscribe(users => {
-      this.users = users;
-      this.cdr.markForCheck();
-    });
+    this.role = localStorage.getItem('role') || '';
+    if (this.role === 'ADMIN') {
+      this.adminService.getUsers().subscribe(users => {
+        this.users = users;
+        this.cdr.markForCheck();
+      });
+    }
   }
 
   changeRole(user: User, event: Event) {
