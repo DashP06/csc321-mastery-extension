@@ -1,9 +1,25 @@
-<button (click)="goToHome()">Home</button>
-<button (click)="goToAdmin()">Admin</button>
+<nav>
+  <div class="left">
+    <button (click)="goToHome()">Home</button>
+    @if (role === "ADMIN" || role === "EDITOR") {
+      <button (click)="goToEditor()">New Post</button>
+    }
+    @if (role === "ADMIN") {
+      <button (click)="goToAdmin()">Admin</button>
+    }
+  </div>
 
-@if (isLoggedIn) {
-  <span>Logged in as {{ name }} ({{ role }})</span>
-  <button (click)="logout()">Logout</button>
-} @else {
-  <button (click)="goToLogin()">Login</button>
-}
+  <div class="center">
+    @if (isLoggedIn) {
+      <span>Logged in as {{ name }} ({{ role }})</span>
+    }
+  </div>
+
+  <div class="right">
+    @if (isLoggedIn) {
+      <button (click)="logout()">Logout</button>
+    } @else {
+      <button (click)="goToLogin()">Login</button>
+    }
+  </div>
+</nav>

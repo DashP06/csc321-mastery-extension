@@ -1,2 +1,19 @@
 <app-navbar/>
-<p>home works!</p>
+
+@if (name === "") {
+    <p>You must be loggen in to visit the Cal Poly blog.</p>
+} @else {
+@for (post of posts; track post.id) {
+  <div>
+    <h2>{{ post.title }}</h2>
+    <p>{{ post.content }}</p>
+    <p>by {{ post.author?.name }}</p>
+    @if (canEdit(post)) {
+      <button (click)="editPost(post)">Edit</button>
+    }
+    @if (canDelete(post)) {
+      <button (click)="deletePost(post)">Delete</button>
+    }
+  </div>
+}
+}

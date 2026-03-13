@@ -1,1 +1,6 @@
-<p>editor works!</p>
+<div>
+  <h2>{{ isNewPost ? 'New Post' : 'Edit Post' }}</h2>
+  <input [(ngModel)]="title" placeholder="Title" />
+  <textarea [(ngModel)]="content" placeholder="Content"></textarea>
+  <button (click)="save()">{{ isNewPost ? 'Create' : 'Save' }}</button>
+</div>

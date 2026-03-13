@@ -1,0 +1,16 @@
+nav {
+  display: flex;
+  align-items: center;
+}
+
+.left, .center, .right {
+  flex: 1;
+}
+
+.center {
+  text-align: center;
+}
+
+.right {
+  text-align: right;
+}

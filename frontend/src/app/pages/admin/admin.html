@@ -1,2 +1,28 @@
 <app-navbar/>
-<p>admin works!</p>
+
+<h2>Manage Users</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Role</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (user of users; track user.id) {
+      <tr>
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>
+          <select [value]="user.role" (change)="changeRole(user, $event)">
+            <option value="ADMIN">ADMIN</option>
+            <option value="EDITOR">EDITOR</option>
+            <option value="VIEWER">VIEWER</option>
+          </select>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
