@@ -1,0 +1,9 @@
+<button (click)="goToHome()">Home</button>
+<button (click)="goToAdmin()">Admin</button>
+
+@if (isLoggedIn) {
+  <span>Logged in as {{ name }} ({{ role }})</span>
+  <button (click)="logout()">Logout</button>
+} @else {
+  <button (click)="goToLogin()">Login</button>
+}
